@@ -1,0 +1,11 @@
+);
+     // addedge_weighted(weighted_graph, 2, 8, 2);
+     // addedge_weighted(weighted_graph, 2, 5, 4);
+     // addedge_weighted(weighted_graph, 2, 3, 7);
+     // addedge_weighted(weighted_graph, 3, 5, 14);
+     // addedge_weighted(weighted_graph, 3, 4, 9);
+     // addedge_weighted(weighted_graph, 4, 5, 10);
+     // addedge_weighted(weighted_graph, 6, 5, 2);
+     // addedge_weighted(weighted_graph, 6, 8, 6);
+     // addedge_weighted(weighted_graph, 6, 7, 1);
+     // addedge_weighted(weighted_graph, 8, 7, 7);
