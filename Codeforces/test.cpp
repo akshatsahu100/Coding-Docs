@@ -1,45 +1,41 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-#define ll long long
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vp vector<pair<int,int>> 
-#define vvp vector<vector<pair<int,int>>> 
-#define vc vector<char>
-ll MOD = 1e9 + 7;
-double pi = 3.14159;
-void inp_vector(vi &a){ for(int i=0; i<(int)a.size(); i++){ cin>>a[i]; }}
-void disp_vector(vi &a){ for(int i=0; i<(int)a.size(); i++){ cout<<a[i]<<" ";  }}
-void disp_vvi(vvi &vec){ for(int i=0; i<(int)vec.size(); i++){ for(int j=0; j<(int)vec[i].size(); j++) cout<<vec[i][j]<<" "; cout<<endl;}}
-void inp_vvi(vvi &vec){ for(int i=0; i<(int)vec.size(); i++) for(int j=0; j<(int)vec[i].size(); j++) cin>>vec[i][j]; }
-
- bool canPair(vector<int> nums, int k) {
-        // Code here.
-        int sum = accumulate(nums.begin(), nums.end(), 0);
-        if(sum % k != 0 || nums.size() % 2 != 0)
-            return false;
-        unordered_map<int,int> mp;
-        for(int i=0; i<nums.size(); i++){
-            mp[nums[i] % k]++;
+class Solution {
+public:
+    int find(vector<int> &presum, unordered_map<int,int> &occ, int target){
+        int ans = INT_MAX;
+        for(int i=0; i<presum.size(); i++){
+            if(occ.count(presum[i] - target)){
+                ans = min(ans, i - occ[presum[i] - target]);
+            }
+            occ[presum[i]] = i;
         }
-        
-        for(auto i:mp){
-            if(i.first*2 == k && i.second>=2)
-                return true;
-            else if(i.first*2 ==k && i.second <2)
-                return false;
-            else if(mp[k - i.first])
-                return true;
-        }
-        
-        return false;
+        return ans;
     }
-
-int main(){
-    int n,k;
-    cin>>n>>k;
-    vi arr(n);
-    inp_vector(arr); 
-    cout<<canPair(arr,k);
-}
+    int minSubArrayLen(int target, vector<int>& nums) {
+        vector<int> presum(nums.size());
+        unordered_map<int,int> occ;
+        presum[0] = nums[0];
+        occ[presum[0]] = 0;
+        occ[0] = -1;
+        int ans = INT_MAX;
+        for(int i=1;i<nums.size(); i++){
+            presum[i] = presum[i-1] + nums[i];
+            occ[presum[i]] = i;
+        }
+        int s = target, e = presum[nums.size() - 1];
+        cout<<find(presum, occ, target);
+        while(s<=e){
+            int mid = (s + e)/ 2;
+            int temp_ans = find(presum, occ, mid);
+            ans = min(ans, temp_ans);
+            if(temp_ans == INT_MAX){
+                e = mid - 1;
+            }
+            else{
+                s = mid + 1;
+            }
+        }
+        if(ans == INT_MAX)
+            return 0;
+        return ans;
+    }
+};
