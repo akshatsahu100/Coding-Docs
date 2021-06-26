@@ -15,27 +15,40 @@ void disp_vector(vi &a){ for(int i=0; i<(int)a.size(); i++){ cout<<a[i]<<" ";  }
 void disp_vvi(vvi &vec){ for(int i=0; i<(int)vec.size(); i++){ for(int j=0; j<(int)vec[i].size(); j++) cout<<vec[i][j]<<" "; cout<<endl;}}
 void inp_vvi(vvi &vec){ for(int i=0; i<(int)vec.size(); i++) for(int j=0; j<(int)vec[i].size(); j++) cin>>vec[i][j]; }
 
-int main(){
-     int t;
-cin>>t;
-while(t--){
-    string s;
-    cin>>s;
+bool powerOf2(ll num){
 
-    if(s.length() <= 3){
-        cout<<"Error"<<endl;
-        continue;
-    }
-    else if(s[0] == '<' && s[1] == '/' && s[s.length()-1] == '>'){
-        if( (s[2] >= 'a' && s[s.length()-2] <= 'z') ||  (s[2] >= '0' && s[s.length()-2] <= '9') ){
-            cout<<"Success"<<endl;
-          //   continue;
-        }
-    }
-    else{
-        cout<<"Error"<<endl;
-    }
+     for(int i=0; i<64; i++){
+          ll x = 1 << i;
+          if(x == num)
+               return true;
+          if(x > num)
+               return false;
+     }
 
-
+     return false;
 }
+
+int main(){
+     ll t;
+     cin>>t;
+     while(t--){
+          ll a,b;
+          cin>>a>>b;
+          if(b<a){
+               cout<<"No"<<endl;
+               continue;
+          }
+
+          if(b == a or a == 0){
+               cout<<"Yes"<<endl;
+               continue;
+          }
+
+          if(a == 1 and powerOf2(b)){
+               cout<<"Yes"<<endl;
+               continue;
+          }
+
+          cout<<"No"<<endl;
+     }
 }
