@@ -20,10 +20,10 @@ int main() {
             newrow.push_back(1);
         }
         for(int i=0; i<spaces; i++)
-            cout<<" ";
+            cout<<` `;
         spaces--;
         for(int i=0; i<newrow.size(); i++)
-            cout<<newrow[i]<<" ";
+            cout<<newrow[i]<<` `;
         cout<<endl;
 
         oldrow.clear();
